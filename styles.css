@@ -1,0 +1,427 @@
+:root{
+    --blue: #00224D;
+    --dark-pink: #5D0E41;
+    --dark-red: #A0153E;
+    --red: #FF204E;
+    --black: #121212;
+    --green: rgb(66, 236, 66);
+    --yellow: #fae352;
+
+    --card-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body{
+    background-color: white;
+    
+    color: white;
+    font-family: "Teko", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--black);
+    padding: 10px 20px;
+}
+
+.header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav{
+    width: 100%;
+    text-align: center;
+    color: white;
+    position: relative;
+
+    ul {
+        list-style: none;
+        display: flex;
+        gap: 50px;
+    }
+
+    a{
+        text-decoration: none;
+        color: white;
+        font-size: 1.1rem;
+        font-size: 25px;
+        letter-spacing: 1px;
+    }
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo p{
+    /* font-family: "Sixtyfour Convergence", sans-serif; */
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+main {
+    text-align: center;
+    padding-top: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--black);
+
+    .google-map{
+        padding-top: 50px;
+    }
+}
+
+.hero{
+    width: 100%;
+
+     h2{
+        font-size: 25px;
+        line-height: 0px;
+        text-wrap: wrap;
+        letter-spacing: 3px;    
+    } 
+}
+
+h1{
+    font-size: 20rem;
+    margin-top: -30px;
+    margin-bottom: -120px;
+    padding: 0;
+} 
+
+/* Productos (cards) */
+.games{
+    margin-bottom: 50px;
+}
+
+
+button{
+    border: none;
+    padding: 10px 20px 8px 20px;
+    border-radius: 15px;
+    background-color: var(--yellow);
+    font-family: "Teko", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    transition: all .2s ease-in-out;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    
+    &:hover{
+        scale: 1.1;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
+    
+    &:active{
+        scale: .9;
+        box-shadow: 
+        rgba(0, 0, 0, 0.2) 0px 2px 4px inset,  
+        rgba(0, 0, 0, 0.3) 0px -7px 13px -3px inset, 
+        rgba(0, 0, 0, 0.4) 0px 3px 0px;
+
+    }
+}
+
+.game-cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 50px 50px 20px 50px;
+    position: relative;
+}
+
+.game-card{
+    background-color: var(--black);
+    border-radius: 20px;
+    /* flex: 1 1 500px; */
+    overflow: hidden;
+    position: relative;
+    box-shadow: none;
+    transition: all .2s ease-out;
+    cursor: pointer;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        max-height: 300px;
+        display: block;
+        transition: .2s ease;
+    }
+
+    .price{
+        display: flex;
+        justify-content: center;
+        /* border-top-left-radius: 15px; */
+        height: auto;
+        width: 100%;
+        /* padding: 10px; */
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        transition: all .2s ease-in-out;
+        background-color: rgba(27, 27, 27, 0.93);
+        gap: 10px;
+        text-wrap: nowrap;
+        align-items: center;
+
+
+        h3{
+            color: var(--green);
+            transition: all .2s ease;
+        }
+
+        small {
+            color: rgb(224, 224, 224);
+            transition: all .2s ease;
+        }
+    }
+}
+
+/* Efecto de tachado */
+small::before{
+    content: '';
+    width: 33px;
+    height: 1px;
+    top: 13px;
+    position: absolute;
+    transform: rotate(-5deg);
+    background: var(--black);
+}
+
+.game-card:hover{
+    box-shadow: var(--card-shadow);
+
+    h3{
+        font-size: 30px;
+    }
+
+    small{
+        font-size: 20px;
+
+        &::before{
+            top: 20px;
+            height: 2px;
+            width: 50px;
+        }
+    }
+
+    .price{
+        width: 100%;
+        border-radius: 0;
+    }
+
+    img {
+        filter: grayscale(1)
+    }
+    
+}
+
+.banner{
+    position: absolute;
+    top: 5%;
+    left: -41%;
+    text-align: center;
+    padding-left: 0;
+    width: 100%;
+    transform: rotate(-30deg);
+}
+
+.offer{
+    background-color: var(--green);
+}
+
+.new{
+    background-color: var(--red);
+    color: white1;
+}
+
+
+/* Reviews */
+.reviews-cards{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Grid para pantallas más pequeñas*/
+@media (max-width: 1300px) {
+    .reviews-cards{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews-cards{
+        grid-template-columns: 1fr;
+    }
+}
+
+.review-card{
+    background-color: var(--black); 
+    color: white;
+    text-wrap: wrap;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 30px;
+    transition: all .2s ease-in-out;
+
+    &:hover{
+        scale: 1.05;
+        box-shadow: var(--card-shadow);
+
+    }
+
+    img{
+        border-radius: 10px;
+    }
+
+    p{
+        font-size: 20px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        max-width: 300px;
+        padding-bottom: 20px;
+    }
+}
+
+.fa-star{
+    transition: all .1s ease-in-out;
+}
+
+.fa-star:hover{
+    scale: 1.5;
+    transform: rotate(30deg);
+}
+
+.review-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.review-stars-name{
+    h3{
+        font-weight: 400;
+    }
+
+    .checked{
+        color: var(--yellow);
+    }
+}
+
+
+/* Formulario de contacto */
+.contact-form{
+    padding-top: 20px;
+}
+
+form{
+    padding: 20px;
+    width: 600px;
+    text-align: start;
+    background-color: var(--black);
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 50px;
+
+    label{
+        margin-left: 5px;
+        font-size: 23px;
+    }
+
+    input{
+        width: 100%;
+        height: 30px;
+        padding: 5px;
+        margin-bottom: 15px;
+        margin-top: 5px;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        border-radius: 5px;
+        border: 1px solid rgb(95, 95, 95);
+        outline: none;
+        padding: 20px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-family: "Teko", sans-serif;
+    }
+
+    textarea{
+        resize: none;
+        font-family: inherit;
+        padding: 10px;
+        margin-top: 5px;
+        width: 100%;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        border: 1px solid rgb(95, 95, 95);
+        padding: 20px;
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+    .form-submit{
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+    }
+}
+
+
+/* Mapa */ 
+.map{
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .map{
+        width: 400px;
+        height: 400px;
+    }
+}
+
+
+
+footer {
+    padding: 30px;
+    position: static;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--black);
+    color: white;
+    text-align: center;
+    align-content: center;
+
+    nav{
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+}
