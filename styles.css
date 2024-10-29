@@ -19,12 +19,12 @@
 
 body{
     background-color: white;
-    
-    color: white;
-    font-family: "Teko", sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: "Inter", sans-serif;
+
+
 }
 
 header {
@@ -44,34 +44,38 @@ nav{
     text-align: center;
     color: white;
     position: relative;
-
-    ul {
-        list-style: none;
-        display: flex;
-        gap: 50px;
-    }
-
-    a{
-        text-decoration: none;
-        color: white;
-        font-size: 1.1rem;
-        font-size: 25px;
-        letter-spacing: 1px;
-    }
 }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    transition: all .2s ease; 
+}
+
+nav a:hover{
+    color: var(--yellow);
+}
+
+
 
 .logo{
     display: flex;
     align-items: center;
     text-decoration: none;
+    transition: all .2s ease;
 }
 
-.logo p{
-    /* font-family: "Sixtyfour Convergence", sans-serif; */
-    font-size: 25px;
-    font-weight: 900;
-    letter-spacing: -2px;
+.logo:hover{
+    transform: rotate(-10deg);
 }
+
 
 main {
     text-align: center;
@@ -81,71 +85,101 @@ main {
     flex-direction: column;
     align-items: center;
     color: var(--black);
-
-    .google-map{
-        padding-top: 50px;
-    }
 }
+
+
 
 .hero{
     width: 100%;
-
-     h2{
-        font-size: 25px;
-        line-height: 0px;
-        text-wrap: wrap;
-        letter-spacing: 3px;    
-    } 
+    margin-top: 50px;
 }
 
 h1{
-    font-size: 20rem;
+    font-size: 35px;
     margin-top: -30px;
     margin-bottom: -120px;
     padding: 0;
+    letter-spacing: -1px;
+    text-wrap: balance;
 } 
+
+
+h2{
+    font-size: 28px;
+    font-weight: 900;
+    text-wrap: wrap;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+h2::before{
+    content: '';
+    display: block;
+    height: 10px;
+    width: 102%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 1.5rem;
+    z-index: -1;
+    position: absolute;
+    background-color: rgba(250, 227, 82, 0);
+    border-radius: 2px;
+    box-shadow: var(--yellow) 3px 3px 0px 0px, var(--black) 5px 5px 0px 0px;
+
+}
+
+h3{
+    font-size: 25px;
+    font-weight: 400;
+}
+
+section{
+    margin-top: 50px;
+}
 
 /* Productos (cards) */
 .games{
     margin-bottom: 50px;
 }
 
-
 button{
     border: none;
     padding: 10px 20px 8px 20px;
-    border-radius: 15px;
+    border-radius: 5px;
     background-color: var(--yellow);
-    font-family: "Teko", sans-serif;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 600;
     text-align: center;
-    transition: all .2s ease-in-out;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-    
-    &:hover{
-        scale: 1.1;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    }
-    
-    &:active{
-        scale: .9;
-        box-shadow: 
-        rgba(0, 0, 0, 0.2) 0px 2px 4px inset,  
-        rgba(0, 0, 0, 0.3) 0px -7px 13px -3px inset, 
-        rgba(0, 0, 0, 0.4) 0px 3px 0px;
+    transition: all .1s ease-in-out;
+    box-shadow: var(--black) 2px 2px 0px 1px ;
+    /* box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; */
+    cursor: pointer;
+}
 
-    }
+
+button:active{
+    transform: translate(2%, 2%);
+
+    /* margin-left: 2px;
+    margin-top: 2px; */
+    box-shadow: none;
+    /* scale: .9;
+    box-shadow: 
+    rgba(0, 0, 0, 0.2) 0px 2px 4px inset,  
+    rgba(0, 0, 0, 0.3) 0px -7px 13px -3px inset, 
+    rgba(0, 0, 0, 0.4) 0px 3px 0px; */
 }
 
 .game-cards{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    justify-content:center;
     margin-top: 30px;
     padding: 50px 50px 20px 50px;
     position: relative;
+    
 }
 
 .game-card{
@@ -157,43 +191,45 @@ button{
     box-shadow: none;
     transition: all .2s ease-out;
     cursor: pointer;
+    font-family: "Teko", sans-serif;
+    user-select: none;
+}
 
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        max-height: 300px;
-        display: block;
-        transition: .2s ease;
-    }
+.game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 300px;
+    display: block;
+    transition: .2s ease;
+}
 
-    .price{
-        display: flex;
-        justify-content: center;
-        /* border-top-left-radius: 15px; */
-        height: auto;
-        width: 100%;
-        /* padding: 10px; */
-        right: 0;
-        bottom: 0;
-        position: absolute;
-        transition: all .2s ease-in-out;
-        background-color: rgba(27, 27, 27, 0.93);
-        gap: 10px;
-        text-wrap: nowrap;
-        align-items: center;
+.game-card .price{
+    display: flex;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    transition: all .2s ease-in-out;
+    background-color: rgba(27, 27, 27, 0.93);
+    gap: 10px;
+    text-wrap: nowrap;
+    align-items: center;
 
+}
 
-        h3{
-            color: var(--green);
-            transition: all .2s ease;
-        }
+.game-card .price p{
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--green);
+    transition: all .2s ease;
+}
 
-        small {
-            color: rgb(224, 224, 224);
-            transition: all .2s ease;
-        }
-    }
+.game-card .price small{
+    color: rgb(224, 224, 224);
+    transition: all .2s ease;
 }
 
 /* Efecto de tachado */
@@ -209,33 +245,32 @@ small::before{
 
 .game-card:hover{
     box-shadow: var(--card-shadow);
-
-    h3{
-        font-size: 30px;
-    }
-
-    small{
-        font-size: 20px;
-
-        &::before{
-            top: 20px;
-            height: 2px;
-            width: 50px;
-        }
-    }
-
-    .price{
-        width: 100%;
-        border-radius: 0;
-    }
-
-    img {
-        filter: grayscale(1)
-    }
-    
 }
 
-.banner{
+.game-card:hover .price p{
+    font-size: 30px;
+}
+
+.game-card:hover .price small{
+    font-size: 20px;
+}
+
+.game-card:hover small::before{
+    top: 20px;
+    height: 2px;
+    width: 50px;
+}
+
+.game-card:hover .price{
+    width: 100%;
+    border-radius: 0;
+}
+
+.game-card:hover img{
+    filter: grayscale(1)
+}
+
+.game-card .banner{
     position: absolute;
     top: 5%;
     left: -41%;
@@ -245,15 +280,14 @@ small::before{
     transform: rotate(-30deg);
 }
 
-.offer{
+.game-card .offer{
     background-color: var(--green);
 }
 
-.new{
+.game-card .new{
     background-color: var(--red);
     color: white1;
 }
-
 
 /* Reviews */
 .reviews-cards{
@@ -261,19 +295,7 @@ small::before{
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 20px;
-}
-
-/* Grid para pantallas más pequeñas*/
-@media (max-width: 1300px) {
-    .reviews-cards{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .reviews-cards{
-        grid-template-columns: 1fr;
-    }
+    justify-items: center;
 }
 
 .review-card{
@@ -286,24 +308,25 @@ small::before{
     text-align: left;
     padding: 30px;
     transition: all .2s ease-in-out;
+    max-width: 350px;
+    text-align: center;
+    user-select: none;
+}
 
-    &:hover{
-        scale: 1.05;
-        box-shadow: var(--card-shadow);
+.review-card img{
+    border-radius: 10px;
+}
 
-    }
+.review-card i {
+    font-size: 15px;
+    font-weight: 600;
+    max-width: 400px;
+    padding-bottom: 20px;
+}
 
-    img{
-        border-radius: 10px;
-    }
-
-    p{
-        font-size: 20px;
-        font-weight: 400;
-        letter-spacing: 1px;
-        max-width: 300px;
-        padding-bottom: 20px;
-    }
+.review-card:hover{
+    scale: 1.05;
+    box-shadow: var(--card-shadow);
 }
 
 .fa-star{
@@ -322,14 +345,20 @@ small::before{
     gap: 20px;
 }
 
-.review-stars-name{
-    h3{
-        font-weight: 400;
-    }
+.review-stars-name h5{
+    text-align: left;
+}
 
-    .checked{
-        color: var(--yellow);
-    }
+.review-stars-name h3{
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.fa-star.checked{
+    color: var(--yellow);
 }
 
 
@@ -346,67 +375,152 @@ form{
     color: white;
     border-radius: 10px;
     margin-bottom: 50px;
-
-    label{
-        margin-left: 5px;
-        font-size: 23px;
-    }
-
-    input{
-        width: 100%;
-        height: 30px;
-        padding: 5px;
-        margin-bottom: 15px;
-        margin-top: 5px;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-        border-radius: 5px;
-        border: 1px solid rgb(95, 95, 95);
-        outline: none;
-        padding: 20px;
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        font-family: "Teko", sans-serif;
-    }
-
-    textarea{
-        resize: none;
-        font-family: inherit;
-        padding: 10px;
-        margin-top: 5px;
-        width: 100%;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-
-        border-radius: 5px;
-        border: none;
-        outline: none;
-        border: 1px solid rgb(95, 95, 95);
-        padding: 20px;
-        font-size: 16px;
-        letter-spacing: 1px;
-    }
-
-    .form-submit{
-        display: flex;
-        justify-content: center;
-        padding-top: 10px;
-    }
 }
 
+form input{
+    width: 100%;
+    font-family: inherit;
+    height: 30px;
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    border-radius: 5px;
+    border: 1px solid rgb(95, 95, 95);
+    outline: none;
+    padding: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    
+}
+
+form textarea{
+    resize: none;
+    font-family: inherit;
+    padding: 10px;
+    margin-top: 5px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    border: 1px solid rgb(95, 95, 95);
+    padding: 20px;
+    font-size: 16px;
+}
+
+form .form-submit{
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+form label{
+    margin-left: 5px;
+    font-size: 16px;
+}
 
 /* Mapa */ 
 .map{
     border-radius: 10px;
 }
 
+.location{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    /* border: 1px solid rgb(207, 207, 207); */
+    background-color: var(--yellow);
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.location .fa{
+    color: black;
+}
+
+.google-map{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.google-map p{
+    font-size: 16px;
+}
+
+/* Grid para pantallas más pequeñas*/
+@media (max-width: 1300px) {
+    .reviews-cards{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
+    .reviews-cards{
+        grid-template-columns: 1fr;
+    }
+
+    nav ul{
+        gap: 25px;
+    }
+
     .map{
         width: 400px;
         height: 400px;
     }
+
+    form{
+        width: 400px;
+    }
 }
 
+@media (max-width: 480px) {
+    .location p {
+        font-size: 13px;
+    }
 
+    
+
+    nav ul{
+        gap: 15px;
+    }
+
+    .logo img{
+        width: 30px;
+    }
+
+    nav a{
+        font-size: 13px;
+    }
+
+    h1{
+        font-size: 30px;
+    }
+
+    h2{
+        font-size: 28px;
+    }
+
+    .google-map h3 {
+        font-size: 20px;
+    }
+
+    .map{
+        width: 300px;
+        height: 300px;
+    }
+
+    form{
+        width: 300px;
+    }
+}
 
 footer {
     padding: 30px;
@@ -418,10 +532,18 @@ footer {
     color: white;
     text-align: center;
     align-content: center;
+}
 
-    nav{
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-    }
+footer p{
+    margin-bottom: 10px;
+}
+
+footer nav {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+cite{
+    color: var(--yellow);
 }

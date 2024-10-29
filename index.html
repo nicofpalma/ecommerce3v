@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3V - Tu Zona de Juegos</title>
+    <title>3v - Tu Zona de Juegos</title>
     <link rel="stylesheet" href="styles.css">
 
+    <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,14 +20,13 @@
     <header>
         <div class="header-content">
             <a class="logo" href="/" >
-                <img src="assets/img/3vlogo.png" width="50" alt="Logo">
-               
+                <img src="assets/img/3vlogo.png" width="50" alt="3v-Logo">
             </a>
 
             <div class="navbar">
                 <nav>
                     <ul>
-                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#" class="highlight">Inicio</a></li>
                         <li><a href="#productos">Productos</a></li>
                         <li><a href="#resenas">Reseñas</a></li>
                         <li><a href="#contacto">Contacto</a></li>
@@ -38,8 +38,7 @@
     
     <main>
         <section class="hero">
-            <h1>3V</h1>
-            <h2>Los mejores juegos, al mejor precio.</h2>
+            <h1>Los mejores juegos, al mejor precio.</h1>
         </section>
 
         <article class="games">
@@ -53,7 +52,7 @@
     
                     <div class="price">
                         <small>$80 USD</small>
-                        <h3>$50 USD</h3>
+                        <p>$50 USD</p>
                     </div>
     
                 </div>
@@ -62,14 +61,14 @@
                     <img src="assets/img/sh2.avif" alt="Silent Hill 2">
     
                     <div class="price">
-                        <h3>$35 USD</h3>
+                        <p>$35 USD</p>
                     </div>
                 </div>
     
                 <div class="game-card">
                     <img src="assets/img/db.jpg"  alt="Dragon Ball: Sparking! ZERO">
                     <div class="price">
-                        <h3>$70 USD</h3>
+                        <p>$70 USD</p>
                     </div>
     
                     <div class="banner new">
@@ -82,7 +81,7 @@
     
                     <div class="price">
                         <small>$50 USD</small>
-                        <h3>$30 USD</h3>
+                        <p>$30 USD</p>
                     </div>
     
                     <div class="banner offer">
@@ -97,30 +96,28 @@
                     </div>
     
                     <div class="price">
-                        <h3>$60 USD</h3>
+                        <p>$60 USD</p>
                     </div>
                 </div>
     
                 <div class="game-card">
                     <img src="assets/img/untildawn.avif" alt="Until Dawn">
                     <div class="price">
-                        <h3>$20 USD</h3>
+                        <p>$20 USD</p>
                     </div>
                 </div>
             </section>
             <button>Ver más</button>
         </article>
        
-
-
         <section id="resenas" class="reviews">
-            <h2>Reseñas de nuestros clientes</h2>
+            <h2>Reseñas de clientes</h2>    
 
             <div class="reviews-cards">
                 <div class="review-card">
-                    <p>"Compré varias veces y volvería a comprar, muy buenos precios."</p>
+                    <i>"Compré varias veces y volvería a comprar, muy buenos precios."</i>
                     <div class="review-info">
-                        <img src="https://i.pravatar.cc/150?u=efm0jlo2npa" alt="" width="110px" height="110px">
+                        <img src="https://i.pravatar.cc/150?u=efm0jlo2npa" alt="Carlos foto" width="110px" height="110px">
                         <div class="review-stars-name">
                             <h5>25 AÑOS</h5>
                             <h3>Carlos Perez</h3>
@@ -134,9 +131,9 @@
                 </div>
      
                 <div class="review-card">
-                    <p>"Tienen los últimos juegos para todas las consolas, confiable."</p>
+                    <i>"Tienen los últimos juegos para todas las consolas, confiable."</i>
                     <div class="review-info">
-                        <img src="https://i.pravatar.cc/150?u=en_llfp0e35" alt="" width="110px" height="110px">
+                        <img src="https://i.pravatar.cc/150?u=en_llfp0e35" alt="Marcos foto" width="110px" height="110px">
                         <div class="review-stars-name">
                             <h5>32 AÑOS</h5>
                             <h3>Marcos López</h3>
@@ -150,10 +147,10 @@
                 </div>
            
                 <div class="review-card">
-                    <p>"Mis hijos están muy contentos, tienen buenas ofertas."</p>
+                    <i>"Mis hijos están muy contentos, tienen buenas ofertas."</i>
 
                     <div class="review-info">
-                        <img src="https://i.pravatar.cc/150?u=oel30jlc" alt="" width="110px" height="110px">
+                        <img src="https://i.pravatar.cc/150?u=oel30jlc" alt="Maria foto" width="110px" height="110px">
 
                         <div class="review-stars-name">
                             <h5>29 AÑOS</h5>
@@ -163,15 +160,16 @@
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star"></span>
+
                         </div>
                     </div>
                 </div>
  
  
                 <div class="review-card">
-                    <p>"Mejores precios que la competencia. Lo recomiendo!"</p>
+                    <i>"Mejores precios que la competencia. Lo recomiendo!"</i>
                     <div class="review-info">
-                        <img src="https://i.pravatar.cc/150?u=asnda293mne" alt="" width="110px" height="110px">
+                        <img src="https://i.pravatar.cc/150?u=asnda293mne" alt="Juan foto" width="110px" height="110px">
 
                         <div class="review-stars-name">
                             <h5>23 AÑOS</h5>
@@ -189,14 +187,18 @@
             </div>
         </section>
 
-        <div class="google-map">
-            <h3>Ubicación</h3>
-            <p>Isla Martín García, Rosales 765, Argentina</p>
+        <section class="google-map">
+            <h2>Ubicación</h2>
+            
             <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d636.1594124530924!2d-58.25048149368045!3d-34.186320370345015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1727739578145!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+            <div class="location">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <p>Isla Martín García, Rosales 765, Argentina</p>
+            </div>
+        </section>
 
-        <div class="contact-form" id="contacto">
-            <h3>Contactanos</h3>
+        <section class="contact-form" id="contacto">
+            <h2>Contactanos</h2>
             <form action="https://formspree.io/f/xpwavkpe" method="POST">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" required>
@@ -211,14 +213,15 @@
                     <button type="submit">Enviar</button>
                 </div>
             </form>
-        </div>
+        </section>
 
     </main>
 
 
 
     <footer>
-        <p>2024 Mi Proyecto. Todos los derechos reservados.</p>
+        <p>3v 2024. Todos los derechos reservados. </p>
+        <cite>Nicolás Fernández Palma</cite>
         <nav>
             <ul>
                 <li><a href="#">Inicio</a></li>
