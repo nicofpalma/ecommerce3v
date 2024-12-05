@@ -14,7 +14,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+}
+
+p{
+    margin: 0;
 }
 
 body{
@@ -23,8 +26,6 @@ body{
     flex-direction: column;
     min-height: 100vh;
     font-family: "Inter", sans-serif;
-
-
 }
 
 header {
@@ -46,24 +47,25 @@ nav{
     position: relative;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 50px;
+.navbar-nav{
+    gap:30px;
 }
 
-nav a {
+.nav-link {
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
     transition: all .2s ease; 
 }
 
-nav a:hover{
-    color: var(--yellow);
+.active{
+    color: var(--yellow) !important;
+    font-weight: 700;
 }
 
-
+nav a:hover{
+    color: var(--yellow) !important;
+}
 
 .logo{
     display: flex;
@@ -87,8 +89,6 @@ main {
     color: var(--black);
 }
 
-
-
 .hero{
     width: 100%;
     margin-top: 50px;
@@ -96,6 +96,7 @@ main {
 
 h1{
     font-size: 35px;
+    font-weight: 700;
     margin-top: -30px;
     margin-bottom: -120px;
     padding: 0;
@@ -149,7 +150,7 @@ button{
     border-radius: 5px;
     background-color: var(--yellow);
     font-size: 17px;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
     transition: all .1s ease-in-out;
     box-shadow: var(--black) 2px 2px 0px 1px ;
@@ -221,6 +222,7 @@ button:active{
 }
 
 .game-card .price p{
+    padding: 0;
     font-size: 18px;
     font-weight: 900;
     color: var(--green);
@@ -455,6 +457,13 @@ form label{
     font-size: 16px;
 }
 
+/* Para controlar el gap de la navbar */ 
+@media(max-width: 991px){
+    .navbar-nav{
+        gap:0;
+    }
+}
+
 /* Grid para pantallas más pequeñas*/
 @media (max-width: 1300px) {
     .reviews-cards{
@@ -465,10 +474,6 @@ form label{
 @media (max-width: 768px) {
     .reviews-cards{
         grid-template-columns: 1fr;
-    }
-
-    nav ul{
-        gap: 25px;
     }
 
     .map{
@@ -484,12 +489,6 @@ form label{
 @media (max-width: 480px) {
     .location p {
         font-size: 13px;
-    }
-
-    
-
-    nav ul{
-        gap: 15px;
     }
 
     .logo img{
@@ -542,6 +541,23 @@ footer nav {
     margin-top: 20px;
     display: flex;
     justify-content: center;
+}
+
+footer ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+footer ul li a{
+    text-decoration: none ;
+    color: white;
 }
 
 cite{
