@@ -1,0 +1,105 @@
+
+/* Register-login page */
+section#registro form {
+    height: 380px;
+}
+
+.login-register-body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.login-register-body main{
+    flex: 1;
+}
+
+.h1-register-login{
+    margin: 0;
+    padding: 0;
+}
+
+.register-login-form {
+    width: 350px;
+    height: 300px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    color: var(--black);
+    font-size: 15px;
+}
+
+.register-login-link{
+    text-align: center;
+}
+
+.register-login-form label{
+    font-weight: 600;
+    color: var(--black);
+}
+
+.register-login-form p {
+    display: inline-flex;
+}
+
+.register-login-form a{
+    display: inline-flex;
+    color: var(--black);
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    text-shadow: 1px 1px 1px var(--yellow);
+}
+
+.register-login-btn{
+    display: flex;
+    align-items: center;
+    height: 35px;
+    margin-top: 10px;
+}
+
+.password-container{
+    position: relative;
+    width: 100%;
+}
+
+.password-container input{
+    width: 100%;
+    padding-right: 40px;
+}
+
+.password-container .password-show{
+    position: absolute;
+    right: 10px;
+    top: 28%;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--black);
+}
+
+.fa-eye{
+    position: relative;
+}
+
+.toast{
+    position: absolute;
+    top: 5%;
+    z-index: 9999;
+}
+
+small::before{
+    all:unset;
+}
+
+small::after{
+    all:unset;
+}
+
+.password-conditions{
+    font-size: 13px;
+    font-weight: 700;
+    text-wrap:  balance;
+    width: 500px;
+    margin-bottom: 50px;
+    color: var(--red);
+}
