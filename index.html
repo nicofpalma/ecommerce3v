@@ -48,8 +48,8 @@
                             <li><a href="#productos" class="nav-link">Productos</a></li>
                             <li><a href="#resenas" class="nav-link">Reseñas</a></li>
                             <li><a href="#contacto" class="nav-link">Contacto</a></li>
-                            <li><a href="registro.html" class="nav-link">Registro</a></li>
-                            <li><a href="login.html" class="nav-link">Iniciar sesión</a></li>
+                            <li class="register-cart-link"><a href="registro.html" class="nav-link">Registro</a></li>
+                            <li class="login-user-link"><a href="login.html" class="nav-link">Iniciar sesión</a></li>
 
                         </ul>
                     </div>
@@ -59,75 +59,24 @@
     </header>
     
     <main>
+        <!--Toast para errores-->
+        <div class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <!-- Texto ingresado por js-->
+                </div>
+            <button type="button" class="btn-close btn-close-black me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"/>
+            </div>
+        </div>
+
+
         <section class="hero">
             <h1>Los mejores juegos, al mejor precio.</h1>
         </section>
 
         <article class="games">
             <section class="game-cards" id="productos">
-                <div class="game-card">
-                    <img src="assets/img/cod6.jpg" alt="Call of Duty: Black Ops 6">
-    
-                    <div class="banner offer">
-                        <p>¡Oferta!</p>
-                    </div>
-    
-                    <div class="price">
-                        <small>$80 USD</small>
-                        <p>$50 USD</p>
-                    </div>
-    
-                </div>
-    
-                <div class="game-card">
-                    <img src="assets/img/sh2.avif" alt="Silent Hill 2">
-    
-                    <div class="price">
-                        <p>$35 USD</p>
-                    </div>
-                </div>
-    
-                <div class="game-card">
-                    <img src="assets/img/db.jpg"  alt="Dragon Ball: Sparking! ZERO">
-                    <div class="price">
-                        <p>$70 USD</p>
-                    </div>
-    
-                    <div class="banner new">
-                        <p>¡Nuevo!</p>
-                    </div>
-                </div>
-    
-                <div class="game-card">
-                    <img src="assets/img/fc25.jpg" alt="EA SPORTS FC 25">
-    
-                    <div class="price">
-                        <small>$50 USD</small>
-                        <p>$30 USD</p>
-                    </div>
-    
-                    <div class="banner offer">
-                        <p>¡Oferta!</p>
-                    </div>
-                </div>
-    
-                <div class="game-card">
-                    <img src="assets/img/wukong.avif"  alt="Black Myth: Wukong">
-                    <div class="banner new">
-                        <p>¡Nuevo!</p>
-                    </div>
-    
-                    <div class="price">
-                        <p>$60 USD</p>
-                    </div>
-                </div>
-    
-                <div class="game-card">
-                    <img src="assets/img/untildawn.avif" alt="Until Dawn">
-                    <div class="price">
-                        <p>$20 USD</p>
-                    </div>
-                </div>
+                <!-- Contenido ingresado por js -->
             </section>
             <button>Ver más</button>
         </article>
@@ -256,5 +205,8 @@
 
     <!-- Bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Js -->
+    <script src="index.js"></script>
 </body>
 </html>

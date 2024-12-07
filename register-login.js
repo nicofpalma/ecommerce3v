@@ -1,4 +1,4 @@
-function inputListener(){
+function registerInputListener(){
     const usernameInput = document.getElementById("nombre");
     const password = document.getElementById('password');
     const passwordConditions = document.querySelector('.password-conditions');
@@ -30,9 +30,10 @@ function inputListener(){
 
         // Si se cumple todo ...
         if(conditions.number && conditions.length8 && conditions.specialChar && conditions.mayus){
-
+            passwordConditions.classList = 'password-conditions';
         } else {
-            
+            const passwordConditions = document.querySelector('.password-conditions');
+            passwordConditions.classList = 'password-conditions showing';
         }
     });
 
@@ -56,13 +57,98 @@ function registerDataListener(){
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
 
-        if(password !== confirmPassword){
-            showToast("Las contraseñas no coinciden");
+        if(username.length < 3){
+            showToast("El nombre de usuario debe tener al menos 3 caracteres.", false);
             return;
         }
 
-        console.log("Registro exitoso");
+        if(password !== confirmPassword){
+            showToast("Las contraseñas no coinciden.", false);
+            return;
+        }
+
+        if(!userExists(username)){
+            // Guardo en LocalStorage
+            addUserToLocalStorage(username, password);
+
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        } else {
+            showToast("El nombre de usuario ya existe, intenta con otro.", false);
+        }
     });
+}
+
+function loginInputListener(){
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById("nombre").value;
+        const password = document.getElementById("password").value;
+
+        login(username, password);
+    });
+}
+
+
+function login(username, password){
+    const users = JSON.parse(localStorage.getItem("users"));
+    const errorMsg = 'El usuario no existe o los datos no son correctos.';
+
+    if(!users){
+        showToast(errorMsg, false);
+        return;
+    }
+
+    for(const userId in users){
+        if(users[userId].username === username && users[userId].password === password){
+            sessionStorage.setItem('loggedIn', JSON.stringify({userId, username}));
+            showToast('Inicio de sesión con éxito', true);
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+            return;
+        }
+    }
+
+    showToast(errorMsg, false);
+    return;
+}
+
+
+
+function userExists(username){
+    const users = JSON.parse(localStorage.getItem("users"));
+
+    if(!users){
+        return false;
+    }
+
+    // Recorro los usuarios y verifico si existe en localStorage
+    for(const userId in users){
+        if(users[userId].username === username){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function addUserToLocalStorage(username, password){
+    let users = JSON.parse(localStorage.getItem("users"));
+    if(!users){
+        users = {};
+    }
+
+    const userId = Object.keys(users).length + 1;
+    users[userId] = { userId, username, password};
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    showToast("Registrado correctamente", true);
 }
 
 function loginDataListener(){
@@ -73,15 +159,20 @@ function loginDataListener(){
     });
 }
 
-function showToast(text){
+function showToast(text, success){
     const toast = new bootstrap.Toast('.toast');
     const toastBody = document.querySelector('.toast-body');
+
+    if(success){
+        const toastHTML = document.querySelector('.toast');
+        toastHTML.classList.toggle('success');
+    }
     
     toastBody.innerHTML = text;
     toast.show();
 }
 
-function showPasswordListener(){
+function showRegisterPasswordListener(){
     const togglePassword = document.querySelector('.password-show');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
@@ -98,8 +189,31 @@ function showPasswordListener(){
     });
 }
 
+function showLoginPasswordListener(){
+    const togglePassword = document.querySelector('.password-show');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+        const typePassword = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+
+        passwordInput.setAttribute('type', typePassword);
+
+        togglePassword.classList.toggle('fa-eye');
+        togglePassword.classList.toggle('fa-eye-slash');
+    });
+}
 
 
-showPasswordListener();
-registerDataListener();
-inputListener();
+// Listeners de login
+if(window.location.pathname.includes('login.html')){
+    showLoginPasswordListener();
+    loginInputListener();
+}
+
+// Listeners de registro
+if(window.location.pathname.includes('registro.html')){
+    registerDataListener();
+    registerInputListener();
+    showRegisterPasswordListener();
+}
+
