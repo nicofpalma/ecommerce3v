@@ -606,3 +606,25 @@ cite{
 .toast .btn-close{
     color: var(--black) !important;
 } 
+
+/* Modal */
+.img-modal{
+    width: 100%;
+    border-radius: 15px;
+}
+
+.modal-footer{
+    justify-content: center;
+}
+
+.modal-footer button {
+    color: var(--black);
+}
+
+.modal-footer button:hover{
+    color: var(--black);
+}
+
+.modal-body p {
+    text-align: left;
+}

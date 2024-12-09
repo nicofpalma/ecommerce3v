@@ -1,4 +1,4 @@
-const gamesInformation = [];
+var gamesInformation = [];
 
 function checkIfLoggedIn(){
     const loggedIn = JSON.parse(sessionStorage.getItem('loggedIn'));
@@ -54,7 +54,7 @@ function showToast(text, success){
     toast.show();
 }
 
-checkIfLoggedIn();
+
 
 function loadGamesIndex(){
     fetch("https://jsonfakery.com/games/random/6")
@@ -71,8 +71,8 @@ function loadGamesIndex(){
 
             const gamesCards = document.getElementById('productos');
             gamesFetched.forEach(game => {
-
                 const gameCard = document.createElement('div');
+                gameCard.setAttribute('id', game.id);
                 gameCard.classList = 'game-card';
 
                 // 1- Imagen del juego
@@ -100,7 +100,7 @@ function loadGamesIndex(){
                 gamePrice.classList = 'price';
                 gameCard.appendChild(gamePrice);
 
-                const calculatedGamePrice = calculateGamePrice(game);
+                let calculatedGamePrice = calculateGamePrice(game);
 
                 let appliedOffer = false;
                 if(game.reviews_count >= 20){
@@ -118,7 +118,8 @@ function loadGamesIndex(){
                 }
 
                 if(appliedOffer){
-                    gamePrice.innerHTML = `<p>$${(calculatedGamePrice - randomDiscount).toFixed(2)} USD</p>`;
+                    calculatedGamePrice = (calculatedGamePrice - randomDiscount).toFixed(2);
+                    gamePrice.innerHTML = `<p>$${calculatedGamePrice} USD</p>`;
                     gamePrice.insertBefore(previousPrice, gamePrice.firstChild);
                 } else {
                     gamePrice.innerHTML = `<p>$${calculatedGamePrice} USD</p>`;
@@ -134,13 +135,15 @@ function loadGamesIndex(){
                 }
 
                 gamesCards.appendChild(gameCard);
-
+                game.price = calculatedGamePrice;
                 gamesInformation.push(game);
+                cardClickListener(gameCard);
             });
         })
         .catch(error => {
             showToast(`Error al obtener los juegos: ${error}`, false);
         });
+    
 }
 
 function loadMoreGames(){
@@ -202,6 +205,113 @@ function viewMoreListener(){
     });
 }
 
-viewMoreListener();
+function cardClickListener(gameCard){
+    const gameId = gameCard.getAttribute('id');
 
+    gameCard.addEventListener('click', () => {
+        const modal = new bootstrap.Modal(document.querySelector('.modal'));
+        handleModal(gameId);
+
+        modal.show();
+    });
+}
+
+function handleModal(gameId){
+    const gameInformation = gamesInformation.find(game => game.id === gameId);
+    document.querySelector('.modal-title').textContent = gameInformation.name;
+
+    const genres = gameInformation.genres.map(genre => genre.name).join(", ");
+    const platforms = gameInformation.platforms.map(platform => platform.name).join(", ");
+    const img = gameInformation.screenshots[1].image_url !== null
+        ? gameInformation.screenshots[1].image_url
+        : gameInformation.screenshots[0].image_url;
+    const tags = gameInformation.tags.map(tag => tag.name).join(", ");
+    const stores = gameInformation.stores.map(store => store.name).join(", ");
+
+    document.querySelector('.modal-body').innerHTML = `
+    <img class='img-modal' src='${img}'></img>
+    <p><strong>Fecha de publicación:</strong> ${gameInformation.released}</p>
+    <p><strong>Géneros:</strong> ${genres}</p>
+    <p><strong>Plataformas:</strong> ${platforms}</p>
+    ${stores !== '' ? `<p><strong>Tiendas:</strong> ${stores}</p>` : ''}
+    ${tags !== '' ? `<p><strong>Tags:</strong> ${tags}</p>` : ''}
+
+    <br>
+    <p><strong>Precio:</strong> $${gameInformation.price} USD</p>
+    <div id='game-modal-id' style='display: none;'>${gameInformation.id}</div>
+    `;
+}
+
+function addCartListener(){
+    const addCartBtn = document.querySelector('.add-cart-btn');
+    addCartBtn.addEventListener('click', () => {
+        const gameId = document.getElementById('game-modal-id').textContent;
+        const game = gamesInformation.find(game => game.id === gameId);
+
+        if(addGameToCart(game)){
+            showToast(`${game.name} agregado al carrito con éxito.`, true);
+        } else {
+            showToast('Ocurrió un error al agregar el juego al carrito.' ,false);
+        }
+    });
+}
+
+function addGameToCart(game){
+    let cart = localStorage.getItem('cart');
+    const userId = JSON.parse(sessionStorage.getItem('loggedIn')).userId;
+
+    if(!userId){
+        console.log('usuario no logueado');
+
+        return false;
+    }
+
+    game.quantity = 1;
+    if(!cart){
+        // Creo el carrito si no está creado
+        cart = [
+            {
+                userId: userId,
+                games: [
+                    game
+                ]
+            }
+        ];
+
+        console.log('carrito creado');
+    } else {
+        // Si el carrito está creado
+        cart = JSON.parse(cart);
+        const userCart = cart.find(userCart => userCart.userId === userId);
+
+        if(!userCart){
+            // Creo el array de games si no tiene ninguno
+            cart.push({
+                userId: userId,
+                games: [game]
+            });
+
+            console.log('se creó el array de games del usuario');
+
+        } else {
+            // Agrego un nuevo game si ya tiene otros y sumo 1 en quantity si el juego ya existía
+            const existingGame = userCart.games.find(g => g.id === game.id);
+ 
+            if(!existingGame){
+                userCart.games.push(game);
+            } else {
+                existingGame.quantity += 1;
+            }
+
+            console.log('se añadió un nuevo juego');
+        }
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    return true;
+}
+
+addCartListener();
+checkIfLoggedIn();
+viewMoreListener();
 loadGamesIndex();
