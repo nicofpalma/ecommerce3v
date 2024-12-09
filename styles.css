@@ -222,6 +222,28 @@ button:not(.btn-close):not(.navbar-toggler):active{
     transition: all .2s ease;
 }
 
+.game-title{
+    display: flex;
+    position: absolute;
+    background-color: rgba(27, 27, 27, 0.93);
+    justify-content: center;
+    text-wrap: balance;
+    bottom: 27px;
+    width: 100%;
+    color: white;
+    font-size: 25px;
+    transition: all .3s ease-in-out;
+    border-top: 2px groove var(--yellow);
+    line-height: 30px;
+    /* font-family: 'Inter', sans-serif; */
+}
+
+.game-card:hover .game-title{
+    align-items: flex-start;
+    height: 48px;
+    bottom: 0px;
+}
+
 /* Efecto de tachado */
 small::before{
     content: '';
@@ -253,6 +275,7 @@ small::before{
 
 .game-card:hover .price{
     width: 100%;
+    background-color: rgba(27, 27, 27, 1);
     border-radius: 0;
 }
 

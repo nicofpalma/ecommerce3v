@@ -1,3 +1,5 @@
+const gamesInformation = [];
+
 function checkIfLoggedIn(){
     const loggedIn = JSON.parse(sessionStorage.getItem('loggedIn'));
 
@@ -69,45 +71,60 @@ function loadGamesIndex(){
 
             const gamesCards = document.getElementById('productos');
             gamesFetched.forEach(game => {
+
                 const gameCard = document.createElement('div');
                 gameCard.classList = 'game-card';
 
                 // 1- Imagen del juego
+                if(game.background_image === null){
+                    console.log("Había un juego sin imágen, se aplicó imágen por defecto");
+                    
+                    game.background_image = 'assets/img/default.avif';
+                }
+
                 const gameImg = document.createElement('img');
                 gameImg.src = game.background_image;
                 gameImg.alt = game.slug;
                 gameCard.appendChild(gameImg);
 
+                // 2 - título
+                const gameTitle = document.createElement('div');
+                gameTitle.classList = 'game-title';
 
-                // 4- precio
+                gameTitle.innerHTML = `<p>${game.name}</p>`;
+
+                gameCard.appendChild(gameTitle);
+
+                // 3 - precio
                 const gamePrice = document.createElement('div');
                 gamePrice.classList = 'price';
+                gameCard.appendChild(gamePrice);
 
                 const calculatedGamePrice = calculateGamePrice(game);
 
-                gamePrice.innerHTML = `<p>$${calculatedGamePrice} USD</p>`;
-
-                gameCard.appendChild(gamePrice);
-
                 let appliedOffer = false;
-                // 2- banners de oferta, si tiene más de 20 reviews
                 if(game.reviews_count >= 20){
                     const offerBanner = document.createElement('div');
                     offerBanner.classList = 'banner offer';
                     offerBanner.innerHTML = '<p>¡Oferta!</p>';
                     gameCard.appendChild(offerBanner);
-
-
-                    const previousPrice = document.createElement('small');
-                    const randomDiscount = Math.floor(Math.random() * 5) + 1;
-
-                    previousPrice.textContent = `$${(calculatedGamePrice - randomDiscount).toFixed(2)} USD`;
-                    gamePrice.insertBefore(previousPrice, gamePrice.firstChild);
                     
+                    var previousPrice = document.createElement('small');
+                    var randomDiscount = Math.floor(Math.random() * 5) + 1;
+
+                    previousPrice.textContent = `$${(calculatedGamePrice)} USD`;
+
                     appliedOffer = true;
                 }
 
-                // juego nuevo
+                if(appliedOffer){
+                    gamePrice.innerHTML = `<p>$${(calculatedGamePrice - randomDiscount).toFixed(2)} USD</p>`;
+                    gamePrice.insertBefore(previousPrice, gamePrice.firstChild);
+                } else {
+                    gamePrice.innerHTML = `<p>$${calculatedGamePrice} USD</p>`;
+                }
+
+                // 4 - juego nuevo
                 if(!appliedOffer && isNewGame(game.released)){
                     const newBanner = document.createElement('div');
                     newBanner.classList = 'banner new';
@@ -117,11 +134,17 @@ function loadGamesIndex(){
                 }
 
                 gamesCards.appendChild(gameCard);
+
+                gamesInformation.push(game);
             });
         })
         .catch(error => {
             showToast(`Error al obtener los juegos: ${error}`, false);
         });
+}
+
+function loadMoreGames(){
+    loadGamesIndex();
 }
 
 // Determina si un juego es "nuevo", si tiene menos de 5 años de lanzado
@@ -167,5 +190,18 @@ function calculateGamePrice(game){
 
     return finalPrice.toFixed(2);
 }
+
+function viewMoreListener(){
+    const viewMoreBtn = document.querySelector('.view-more-btn');
+    const gamesSection = document.querySelector('.games');
+
+    viewMoreBtn.addEventListener("click", () => {
+        loadMoreGames();
+        gamesSection.removeChild(viewMoreBtn);
+        gamesSection.appendChild(viewMoreBtn);
+    });
+}
+
+viewMoreListener();
 
 loadGamesIndex();
