@@ -3,7 +3,9 @@ export function getCart(){
 }
 
 export function getUserId(){
-    return JSON.parse(sessionStorage.getItem('loggedIn')).userId;
+    const loggedIn = JSON.parse(sessionStorage.getItem('loggedIn'));
+    if(!loggedIn) return null;
+    return loggedIn.userId;
 }
 
 export function getUserCart(cart, userId){
@@ -64,10 +66,10 @@ export function checkIfLoggedIn(){
     // 1 - Obtengo los links de la nav
     const registerLink = document.querySelector('.register-cart-link');
     const loginLink = document.querySelector('.login-user-link');
+    loginLink.remove();
 
     // 2 - Elimino los links de la nav dejando solo el LI
     registerLink.removeChild(registerLink.firstChild);
-    loginLink.removeChild(loginLink.firstChild);
 
     // 3 - Reemplazo el link de registro por el carrito
     const cartIcon = document.createElement('i');
@@ -91,31 +93,22 @@ export function checkIfLoggedIn(){
     registerLink.appendChild(cartLink);
     registerLink.appendChild(cartItems);
 
-    // 4 - Reemplazo el link de login por el perfil de usuario
-    const userIcon = document.createElement('i');
-    const userLink = document.createElement('a');
-
-    userLink.className = 'nav-link';
-    userLink.setAttribute('href', 'perfil.html');
-
-    userIcon.className = 'fa fa-user-circle-o';
-    userIcon.setAttribute('aria-hidden', true);
-
-    userLink.appendChild(userIcon);
-
-    loginLink.appendChild(userLink);
-
     // Footer
     const footerRegisterCart = document.querySelector('.footer-register-cart');
-    const footerLoginProfile = document.querySelector('.footer-login-profile');
+    const footerLogin = document.querySelector('.footer-login-profile');
+    footerLogin.remove();
 
     footerRegisterCart.removeChild(footerRegisterCart.firstChild);
-    footerLoginProfile.removeChild(footerLoginProfile.firstChild);
-
     footerRegisterCart.appendChild(cartLink.cloneNode(true));
-    footerLoginProfile.appendChild(userLink.cloneNode(true));
 
     return true;
+}
+
+export function getUserInformation(userId){
+    const users = JSON.parse(localStorage.getItem('users'));
+    console.log(users);
+    
+    return users.find(user => user.userId == userId);
 }
 
 export function hideLoader(time){

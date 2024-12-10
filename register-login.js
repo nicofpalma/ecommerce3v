@@ -104,23 +104,21 @@ function login(username, password){
         return;
     }
 
-    for(const userId in users){
-        if(users[userId].username === username && users[userId].password === password){
-            sessionStorage.setItem('loggedIn', JSON.stringify({userId, username}));
-            Utils.showToast('Inicio de sesión con éxito', true);
+    const validLogin = users.find(user => user.username === username && user.password === password);
+    if(!validLogin){
+        Utils.showToast(errorMsg, false);
+        return;
+    } else {    
+        const userId = validLogin.userId;
+        sessionStorage.setItem('loggedIn', JSON.stringify({userId, username}));
+        Utils.showToast('Inicio de sesión con éxito', true);
 
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1000);
-            return;
-        }
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1000);
+        return;
     }
-
-    Utils.showToast(errorMsg, false);
-    return;
 }
-
-
 
 function userExists(username){
     const users = JSON.parse(localStorage.getItem("users"));
@@ -129,24 +127,20 @@ function userExists(username){
         return false;
     }
 
-    // Recorro los usuarios y verifico si existe en localStorage
-    for(const userId in users){
-        if(users[userId].username === username){
-            return true;
-        }
-    }
-
-    return false;
+    const userExists = users.find(user => user.username === username);
+    if(!userExists) return false;
+    else return true;
 }
 
 function addUserToLocalStorage(username, password){
     let users = JSON.parse(localStorage.getItem("users"));
     if(!users){
-        users = {};
+        users = [];
     }
 
-    const userId = Object.keys(users).length + 1;
-    users[userId] = { userId, username, password};
+    const userId = users.length + 1;
+    const newUser = {userId, username, password};
+    users.push(newUser);
 
     localStorage.setItem("users", JSON.stringify(users));
 

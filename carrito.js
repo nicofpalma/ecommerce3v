@@ -5,7 +5,7 @@ function getCartGames(){
     const cart = Utils.getCart();
 
     if(!cart){
-        cartTable.innerHTML = `<p>No hay juegos en tu carrito.</p>`;
+        cartTable.innerHTML = `<p class="no-games-cart">No hay juegos en tu carrito.</p>`;
         return;
     } 
     
@@ -13,7 +13,7 @@ function getCartGames(){
     const userCart = Utils.getUserCart(cart, userId);
 
     if(!userCart || userCart.games.length === 0){
-        cartTable.innerHTML = `<p>No hay juegos en tu carrito</p>`;
+        cartTable.innerHTML = `<p class="no-games-cart">No hay juegos en tu carrito</p>`;
         return;
     }
 
@@ -139,6 +139,16 @@ function deleteGame(gameId){
     localStorage.setItem('cart', JSON.stringify(cart));
     getCartGames();
 }
+
+function cartH1(){
+    const cartH1 = document.querySelector('.cart-h1');
+    const userId = Utils.getUserId();
+    
+    const user = Utils.getUserInformation(userId);
+    cartH1.textContent = `${user.username}, tus juegos en el carrito`;
+}
+
+cartH1();
 
 if(Utils.checkIfLoggedIn()){
     console.log("logueado");

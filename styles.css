@@ -21,7 +21,8 @@ p{
 }
 
 body{
-    background-color: white;
+    background-color: #f9fcff;
+    background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -31,6 +32,8 @@ body{
 header {
     background-color: var(--black);
     padding: 10px 20px;
+    z-index: inherit;
+    z-index: 11;
 }
 
 .header-content{
@@ -166,7 +169,7 @@ button:not(.btn-close):not(.navbar-toggler):active{
     gap: 20px;
     justify-content:center;
     margin-top: 0px;
-    padding: 50px 50px 20px 50px;
+    padding: 20px 50px 20px 50px;
     position: relative;
 }
 
@@ -244,9 +247,9 @@ button:not(.btn-close):not(.navbar-toggler):active{
 /* Efecto de tachado */
 small::before{
     content: '';
-    width: 33px;
+    width: 45px;
     height: 1px;
-    top: 13px;
+    top: 12px;
     position: absolute;
     transform: rotate(-5deg);
     background: var(--black);
@@ -267,7 +270,7 @@ small::before{
 .game-card:hover small::before{
     top: 20px;
     height: 2px;
-    width: 50px;
+    width: 70px;
 }
 
 .game-card:hover .price{
@@ -545,6 +548,7 @@ footer {
     color: white;
     text-align: center;
     align-content: center;
+    z-index: 11;
 }
 
 footer p{
@@ -654,7 +658,7 @@ footer a i {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: 10;
     font-weight: 700;
 }
 

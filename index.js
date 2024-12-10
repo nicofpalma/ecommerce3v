@@ -197,7 +197,8 @@ function addCartListener(){
             Utils.showToast(`${game.name} agregado al carrito con éxito.`, true);
             Utils.updateCartItems();
         } else {
-            Utils.showToast('Ocurrió un error al agregar el juego al carrito.' ,false);
+            Utils.showToast('Debes iniciar sesión para añadir juegos al carrito', false);
+
         }
     });
 }
@@ -252,8 +253,47 @@ function addGameToCart(game){
     return true;
 }
 
+function welcomeTitle(){
+    const indexH1 = document.querySelector('.index-h1');
+    const userId = Utils.getUserId();
+    
+    const user = Utils.getUserInformation(userId);
+    indexH1.textContent = `¡Bienvenido ${user.username}!`;
+
+    const titleH2 = document.createElement('h2');
+    titleH2.textContent = 'Juegos para vos';
+    
+    document.querySelector('.hero').appendChild(titleH2);
+}
+
+function contactListener(){
+    const contactForm = document.querySelector('.contact');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        
+        let empty = false;
+        inputs.forEach(input => {
+            if(input.value.trim() === ""){
+                console.log(`Campo ${input.tagName} vacio`);
+                empty = true;
+            } else {
+                console.log(`Campo ${input.tagName} completo`);
+            }
+        });
+
+        if(empty){
+            Utils.showToast('Debe completar todos los campos', false);
+        }
+    })
+}
+
 Utils.hideLoader(2000);
+contactListener();
 addCartListener();
-Utils.checkIfLoggedIn();
+if(Utils.checkIfLoggedIn()){
+    welcomeTitle();
+}
 viewMoreListener();
 loadGamesIndex();
