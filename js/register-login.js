@@ -203,13 +203,13 @@ function showLoginPasswordListener(){
 
 
 // Listeners de login
-if(window.location.pathname.includes('login.html')){
+if(window.location.pathname.includes('login')){
     showLoginPasswordListener();
     loginInputListener();
 }
 
 // Listeners de registro
-if(window.location.pathname.includes('registro.html')){
+if(window.location.pathname.includes('registro')){
     registerDataListener();
     registerInputListener();
     showRegisterPasswordListener();

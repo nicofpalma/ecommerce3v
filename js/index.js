@@ -25,7 +25,7 @@ function loadGamesIndex(){
                 if(game.background_image === null){
                     console.log("Había un juego sin imágen, se aplicó imágen por defecto");
                     
-                    game.background_image = 'assets/img/default.avif';
+                    game.background_image = '/assets/img/default.avif';
                 }
 
                 const gameImg = document.createElement('img');
