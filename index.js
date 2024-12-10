@@ -1,66 +1,12 @@
+import * as Utils from './utils.js';
+
 var gamesInformation = [];
-
-function checkIfLoggedIn(){
-    const loggedIn = JSON.parse(sessionStorage.getItem('loggedIn'));
-
-    if(!loggedIn){
-        return false;
-    }
-
-    // 1 - Obtengo los links de la nav
-    const registerLink = document.querySelector('.register-cart-link');
-    const loginLink = document.querySelector('.login-user-link');
-
-    // 2 - Elimino los links de la nav dejando solo el LI
-    registerLink.removeChild(registerLink.firstChild);
-    loginLink.removeChild(loginLink.firstChild);
-
-    // 3 - Reemplazo el link de registro por el carrito
-    const cartIcon = document.createElement('i');
-    const cartLink = document.createElement('a');
-    cartLink.className = 'nav-link';
-    cartLink.setAttribute('href', 'carrito.html');
-
-    cartIcon.className = 'fa fa-shopping-cart';
-    cartIcon.setAttribute('aria-hidden', true);
-
-    cartLink.appendChild(cartIcon);
-    registerLink.appendChild(cartLink);
-
-    // 4 - Reemplazo el link de login por el perfil de usuario
-    const userIcon = document.createElement('i');
-    const userLink = document.createElement('a');
-
-    userLink.className = 'nav-link';
-    userLink.setAttribute('href', 'perfil.html');
-
-    userIcon.className = 'fa fa-user-circle-o';
-    userIcon.setAttribute('aria-hidden', true);
-
-    userLink.appendChild(userIcon);
-    loginLink.appendChild(userLink);
-}
-
-function showToast(text, success){
-    const toast = new bootstrap.Toast('.toast');
-    const toastBody = document.querySelector('.toast-body');
-
-    if(success){
-        const toastHTML = document.querySelector('.toast');
-        toastHTML.classList.toggle('success');
-    }
-    
-    toastBody.innerHTML = text;
-    toast.show();
-}
-
-
 
 function loadGamesIndex(){
     fetch("https://jsonfakery.com/games/random/6")
         .then(response => {
             if(!response.ok){
-                showToast('Error al obtener los juegos', false);
+                Utils.showToast('Error al obtener los juegos', false);
                 return;
             }
 
@@ -141,9 +87,8 @@ function loadGamesIndex(){
             });
         })
         .catch(error => {
-            showToast(`Error al obtener los juegos: ${error}`, false);
+            Utils.showToast(`Error al obtener los juegos: ${error}`, false);
         });
-    
 }
 
 function loadMoreGames(){
@@ -249,20 +194,19 @@ function addCartListener(){
         const game = gamesInformation.find(game => game.id === gameId);
 
         if(addGameToCart(game)){
-            showToast(`${game.name} agregado al carrito con éxito.`, true);
+            Utils.showToast(`${game.name} agregado al carrito con éxito.`, true);
+            Utils.updateCartItems();
         } else {
-            showToast('Ocurrió un error al agregar el juego al carrito.' ,false);
+            Utils.showToast('Ocurrió un error al agregar el juego al carrito.' ,false);
         }
     });
 }
 
 function addGameToCart(game){
-    let cart = localStorage.getItem('cart');
-    const userId = JSON.parse(sessionStorage.getItem('loggedIn')).userId;
+    let cart = Utils.getCart();
+    const userId = Utils.getUserId();
 
     if(!userId){
-        console.log('usuario no logueado');
-
         return false;
     }
 
@@ -281,18 +225,15 @@ function addGameToCart(game){
         console.log('carrito creado');
     } else {
         // Si el carrito está creado
-        cart = JSON.parse(cart);
         const userCart = cart.find(userCart => userCart.userId === userId);
 
         if(!userCart){
-            // Creo el array de games si no tiene ninguno
             cart.push({
                 userId: userId,
                 games: [game]
             });
 
             console.log('se creó el array de games del usuario');
-
         } else {
             // Agrego un nuevo game si ya tiene otros y sumo 1 en quantity si el juego ya existía
             const existingGame = userCart.games.find(g => g.id === game.id);
@@ -311,7 +252,8 @@ function addGameToCart(game){
     return true;
 }
 
+Utils.hideLoader(2000);
 addCartListener();
-checkIfLoggedIn();
+Utils.checkIfLoggedIn();
 viewMoreListener();
 loadGamesIndex();

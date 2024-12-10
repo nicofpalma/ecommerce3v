@@ -79,10 +79,9 @@ nav a:hover{
     transform: rotate(-10deg);
 }
 
-
 main {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 40px;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -92,14 +91,12 @@ main {
 
 .hero{
     width: 100%;
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 
 h1{
     font-size: 35px;
     font-weight: 700;
-    margin-top: -30px;
-    margin-bottom: -120px;
     padding: 0;
     letter-spacing: -1px;
     text-wrap: balance;
@@ -168,7 +165,7 @@ button:not(.btn-close):not(.navbar-toggler):active{
     flex-wrap: wrap;
     gap: 20px;
     justify-content:center;
-    margin-top: 30px;
+    margin-top: 0px;
     padding: 50px 50px 20px 50px;
     position: relative;
 }
@@ -475,6 +472,10 @@ form label{
     .navbar-nav{
         gap:0;
     }
+
+    .register-cart-link{
+        gap: 10px;
+    }
 }
 
 /* Grid para pantallas más pequeñas*/
@@ -590,11 +591,13 @@ cite{
 
 /* Toast */
 .toast{
-    position: absolute;
+    position: fixed;
     background-color: var(--yellow) !important;
     font-weight: 600;
     color: var(--black);
     top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 9999;
     text-align: left;
 }
@@ -627,4 +630,48 @@ cite{
 
 .modal-body p {
     text-align: left;
+}
+
+.register-cart-link{
+    display: flex;
+    align-items: center;
+}
+
+footer a i {
+    font-size: 25px !important;
+}
+
+
+/* Loader */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    font-weight: 700;
+}
+
+#loader img{
+    width: 100px;
+    animation: move 1s ease-in-out infinite;
+}
+
+/* Animación de giro */
+@keyframes move {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(20deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }

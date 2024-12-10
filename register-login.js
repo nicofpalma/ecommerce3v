@@ -1,3 +1,5 @@
+import * as Utils from './utils.js';
+
 function registerInputListener(){
     const usernameInput = document.getElementById("nombre");
     const password = document.getElementById('password');
@@ -58,12 +60,12 @@ function registerDataListener(){
         const confirmPassword = document.getElementById("confirmPassword").value;
 
         if(username.length < 3){
-            showToast("El nombre de usuario debe tener al menos 3 caracteres.", false);
+            Utils.showToast("El nombre de usuario debe tener al menos 3 caracteres.", false);
             return;
         }
 
         if(password !== confirmPassword){
-            showToast("Las contraseñas no coinciden.", false);
+            Utils.showToast("Las contraseñas no coinciden.", false);
             return;
         }
 
@@ -75,7 +77,7 @@ function registerDataListener(){
                 window.location.href = 'login.html';
             }, 1000);
         } else {
-            showToast("El nombre de usuario ya existe, intenta con otro.", false);
+            Utils.showToast("El nombre de usuario ya existe, intenta con otro.", false);
         }
     });
 }
@@ -98,14 +100,14 @@ function login(username, password){
     const errorMsg = 'El usuario no existe o los datos no son correctos.';
 
     if(!users){
-        showToast(errorMsg, false);
+        Utils.showToast(errorMsg, false);
         return;
     }
 
     for(const userId in users){
         if(users[userId].username === username && users[userId].password === password){
             sessionStorage.setItem('loggedIn', JSON.stringify({userId, username}));
-            showToast('Inicio de sesión con éxito', true);
+            Utils.showToast('Inicio de sesión con éxito', true);
 
             setTimeout(() => {
                 window.location.href = 'index.html';
@@ -114,7 +116,7 @@ function login(username, password){
         }
     }
 
-    showToast(errorMsg, false);
+    Utils.showToast(errorMsg, false);
     return;
 }
 
@@ -148,7 +150,7 @@ function addUserToLocalStorage(username, password){
 
     localStorage.setItem("users", JSON.stringify(users));
 
-    showToast("Registrado correctamente", true);
+    Utils.showToast("Registrado correctamente", true);
 }
 
 function loginDataListener(){
@@ -161,11 +163,13 @@ function loginDataListener(){
 
 function showToast(text, success){
     const toast = new bootstrap.Toast('.toast');
+    const toastHTML = document.querySelector('.toast');
     const toastBody = document.querySelector('.toast-body');
 
     if(success){
-        const toastHTML = document.querySelector('.toast');
-        toastHTML.classList.toggle('success');
+        toastHTML.classList.add('success');
+    } else{
+        toastHTML.classList.remove('success');
     }
     
     toastBody.innerHTML = text;
