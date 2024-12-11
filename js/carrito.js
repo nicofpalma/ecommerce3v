@@ -148,7 +148,6 @@ function cartH1(){
     cartH1.textContent = `${user.username}, tus juegos en el carrito`;
 }
 
-cartH1();
 
 if(Utils.checkIfLoggedIn()){
     console.log("logueado");
@@ -156,5 +155,7 @@ if(Utils.checkIfLoggedIn()){
 } else {
     window.location.href = 'index.html';
 }
+
+cartH1();
 
 Utils.hideLoader(500);

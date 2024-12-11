@@ -16,7 +16,7 @@ function loadGamesIndex(){
             console.log("Juegos: ", gamesFetched);
 
             const gamesCards = document.getElementById('productos');
-            gamesFetched.forEach(game => {
+            gamesFetched.forEach((game, index) => {
                 const gameCard = document.createElement('div');
                 gameCard.setAttribute('id', game.id);
                 gameCard.classList = 'game-card';
@@ -81,6 +81,13 @@ function loadGamesIndex(){
                 }
 
                 gamesCards.appendChild(gameCard);
+
+                void gameCard.offsetWidth;
+                setTimeout(() => {
+                    gameCard.classList.add('appear');
+                }, (index+1) * 500)
+
+
                 game.price = calculatedGamePrice;
                 gamesInformation.push(game);
                 cardClickListener(gameCard);

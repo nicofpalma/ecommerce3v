@@ -183,6 +183,17 @@ button:not(.btn-close):not(.navbar-toggler):active{
     cursor: pointer;
     font-family: "Teko", sans-serif;
     user-select: none;
+    opacity: 0;
+    transform: translateY(-2000px);
+
+    transition: all .5s ease-in-out;
+}
+
+.game-card.appear{
+    opacity: 1;
+    transform: translateY(0);
+    transform: translateX(0);
+
 }
 
 .game-card img {
@@ -589,8 +600,9 @@ cite{
     color: var(--yellow);
 }
 
-.fa-shopping-cart, .fa-user-circle-o{
+.fa-shopping-cart, .fa-sign-out{
     font-size: 25px;
+    cursor: pointer;
 }
 
 /* Toast */

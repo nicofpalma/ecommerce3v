@@ -66,7 +66,7 @@ export function checkIfLoggedIn(){
     // 1 - Obtengo los links de la nav
     const registerLink = document.querySelector('.register-cart-link');
     const loginLink = document.querySelector('.login-user-link');
-    loginLink.remove();
+    loginLink.removeChild(loginLink.firstChild);
 
     // 2 - Elimino los links de la nav dejando solo el LI
     registerLink.removeChild(registerLink.firstChild);
@@ -89,15 +89,36 @@ export function checkIfLoggedIn(){
     cartItems.className = 'cart-items';
     cartItems.textContent = getUserCartItems(); 
 
+    // ----
+    const logoutIcon = document.createElement('i');
+    const logoutLink = document.createElement('a');
+    logoutLink.className = 'nav-link';
+
+    logoutIcon.className = 'fa fa-sign-out';
+    logoutIcon.setAttribute('aria-hidden', true);
+
+    logoutLink.appendChild(logoutIcon);
+
+    logoutLink.onclick = () => {
+        sessionStorage.clear();
+        showToast('Se ha cerrado la sesión', true);
+
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500)
+    };
+
     cartLink.appendChild(cartIcon);
     registerLink.appendChild(cartLink);
     registerLink.appendChild(cartItems);
+    loginLink.appendChild(logoutLink);
 
     // Footer
     const footerRegisterCart = document.querySelector('.footer-register-cart');
     const footerLogin = document.querySelector('.footer-login-profile');
-    footerLogin.remove();
-
+  
+    footerLogin.removeChild(footerLogin.firstChild);
+    footerLogin.appendChild(logoutLink.cloneNode(true));
     footerRegisterCart.removeChild(footerRegisterCart.firstChild);
     footerRegisterCart.appendChild(cartLink.cloneNode(true));
 
