@@ -14,3 +14,41 @@ Toda la web es responsive. Se usaron algunas características de bootstrap como 
 - **Carrito de Compras**: Gestión dinámica del carrito, incluyendo incremento/disminución de cantidades y eliminación de juegos.
 
 ---
+
+## **Tecnologías Utilizadas**
+
+### Frontend
+- **HTML** y **CSS**: Para estructura y estilos de la web.
+- **JavaScript**: Para las interacciones dinámicas y gestión de datos.
+- **Bootstrap 5**: Utilizado para algunos componentes y clases css predefinidas que facilitan la programación de algunos componentes.
+
+### Backend
+- **LocalStorage/SessionStorage**: Simula un backend ligero para almacenar datos como usuarios, juegos y carrito de compras.
+
+### Hosting
+- **Netlify**: Implementación de la web con soporte para redirecciones y optimización automática. La web está desplegada en [https://3vjuegos.netlify.app/](https://3vjuegos.netlify.app/).
+
+
+## **Estructura del Proyecto**
+
+```
+/
+├── assets/
+│   └── img/               # Imágenes  
+├── js/
+│   ├── utils.js           # Funciones que se usan en varias secciones
+│   ├── register-login.js  # Funciones de registro y login
+│   ├── carrito.js         # Funciones de carrito de compras
+│   └── index.js           # Funciones para el index
+├── index.html             # Página principal
+├── carrito.html           # Página del carrito
+├── registro.html          # Página de registro
+├── login.html             # Página de login
+└── README.md              # Esta documentación
+```
+
+## **Autor**
+
+**Nicolás Fernández Palma**
+
+2024. Todos los derechos reservados.
