@@ -99,14 +99,7 @@ export function checkIfLoggedIn(){
 
     logoutLink.appendChild(logoutIcon);
 
-    logoutLink.onclick = () => {
-        sessionStorage.clear();
-        showToast('Se ha cerrado la sesión', true);
-
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 1500)
-    };
+    logoutEvent(logoutLink);
 
     cartLink.appendChild(cartIcon);
     registerLink.appendChild(cartLink);
@@ -118,11 +111,25 @@ export function checkIfLoggedIn(){
     const footerLogin = document.querySelector('.footer-login-profile');
   
     footerLogin.removeChild(footerLogin.firstChild);
-    footerLogin.appendChild(logoutLink.cloneNode(true));
+    
+    const clonedLogoutLink = logoutLink.cloneNode(true);
+    logoutEvent(clonedLogoutLink);
+    footerLogin.appendChild(clonedLogoutLink);
     footerRegisterCart.removeChild(footerRegisterCart.firstChild);
     footerRegisterCart.appendChild(cartLink.cloneNode(true));
 
     return true;
+}
+
+function logoutEvent(link){
+    link.onclick = () => {
+        sessionStorage.clear();
+        showToast('Se ha cerrado la sesión', true);
+
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
+    };
 }
 
 export function getUserInformation(userId){
